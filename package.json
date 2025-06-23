@@ -4,7 +4,7 @@
   "description": "Backend Services of Rencanain Application",
   "main": "index.js",
   "scripts": {
-    "build": "tsup src/index.ts --format cjs --out-dir api --minify",
+    "build": "tsup",
     "dev": "nodemon --watch src --exec ts-node src/index.ts",
     "start": "node dist/index.js"
   },
