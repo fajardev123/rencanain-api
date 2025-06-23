@@ -21,7 +21,7 @@ node_modules/
 ### Dependency Lock Files (monorepo hanya butuh satu di root)
 package-lock.json
 pnpm-lock.yaml
-yarn.lock
+# yarn.lock
 
 ### Build Output
 dist
