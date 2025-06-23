@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+generator kysely {
+  provider = "prisma-kysely"
+  output   = "../src/config"
+  fileName = "types.ts"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Peran {
+  id         Int       @id @default(autoincrement())
+  kode       String?   @db.VarChar(20)
+  nama       String?   @db.VarChar(100)
+  detail     String?   @db.Text()
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+
+  @@map("peran")
+}
+
+model User {
+  id         Int       @id @default(autoincrement())
+  nama       String?   @db.VarChar(100)
+  username   String?   @db.VarChar(20)
+  password   String?   @db.VarChar(255)
+  email      String?   @db.VarChar(100)
+  telepon    String?   @db.VarChar(20)
+  id_peran   Int?      @db.Int()
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+
+  @@map("user")
+}
+
+model AkunPembayaran {
+  id         Int       @id @default(autoincrement())
+  kode       String?   @db.VarChar(50)
+  nama       String?   @db.VarChar(100)
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+
+  @@map("akun_pembayaran")
+}
+
+model Kategori {
+  id         Int       @id @default(autoincrement())
+  kode       String?   @db.VarChar(50)
+  nama       String?   @db.VarChar(100)
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+
+  @@map("kategori")
+}
+
+model Transaksi {
+  id                 Int       @id @default(autoincrement())
+  tanggal_transaksi  DateTime? @default(now())
+  nama               String?   @db.VarChar(255)
+  tipe               String?   @db.VarChar(10)
+  nominal            Int?      @db.Int()
+  id_user            Int?      @db.Int()
+  id_akun_pembayaran Int?      @db.Int()
+  id_kategori        Int?      @db.Int()
+  created_at         DateTime? @default(now())
+  updated_at         DateTime? @updatedAt
+
+  @@map("transaksi")
+}

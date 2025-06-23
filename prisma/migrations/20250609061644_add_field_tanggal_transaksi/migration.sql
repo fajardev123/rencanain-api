@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `transaksi` ADD COLUMN `tanggal` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3);
