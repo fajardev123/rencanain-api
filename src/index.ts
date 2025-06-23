@@ -4,7 +4,6 @@ import { privateRoutes, publicRoutes } from "./routes";
 import { resourceReply } from "./utils";
 import fastifyCookie from "@fastify/cookie";
 import fastifyCors from "@fastify/cors";
-import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 const app = fastify({
   loggerInstance: pinoTransport,
@@ -31,8 +30,3 @@ app.listen({ port: APP_PORT, host: APP_HOST }, (err) => {
     process.exit(1);
   }
 });
-
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  await app.ready();
-  app.server.emit("request", req, res);
-}
